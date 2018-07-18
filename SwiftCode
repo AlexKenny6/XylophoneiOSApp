@@ -1,0 +1,60 @@
+//
+//  ViewController.swift
+//  Xylophone App
+//
+//  Created by Alex Kenny on 17/07/2018.
+//  Copyright © 2018 Pacwest Software Development LLC. All rights reserved.
+//
+
+import UIKit
+import AVFoundation
+
+class ViewController: UIViewController {
+    
+    var audioPlayer : AVAudioPlayer!
+    let soundArray = ["note1", "note2", "note3", "note4", "note5", "note6", "note7"]
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    } // func viewDidLoad end
+
+
+
+    @IBAction func notePressed(_ sender: UIButton) {
+        
+        playSound(soundFileName: soundArray[sender.tag - 1])
+        // You could change the "soundArray[sender.tag - 1]" to "note#" to test if one sound is working
+        
+       
+    } // func notePressed end
+    
+    
+    
+    func playSound(soundFileName : String) {
+        
+        let soundURL = Bundle.main.url(forResource: soundFileName, withExtension: "wav")
+        
+        do {
+            
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL!)
+            
+        } // do end
+            
+        catch {
+            
+            print(error)
+            
+        } // catch end
+        
+        audioPlayer.play()
+        
+    } // func playSound end
+    
+    
+    
+    
+    
+    
+} // ViewController: UIViewController end
+
